@@ -8,7 +8,6 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -32,9 +31,8 @@ import com.hp.hpl.jena.reasoner.rulesys.Rule;
 @SOAPBinding(style=Style.RPC)
 public class Bakery {
 	
-	private Model model;
-	
 	private InfModel infmodel;
+
 	
 	private static final String ResourceURI = "http://localhost/bakery.owl#";
 	private static final String PropertyURI = "http://localhost/bakery.owl#";
@@ -44,20 +42,23 @@ public class Bakery {
 	private static Logger logger = Logger.getLogger(Bakery.class);
 	
 	public Bakery() {
-		model = ModelFactory.createMemModelMaker().createModel("bakery");
-		model.read("file:data/bakery.xml", "RDF/XML");
-		model.read("file:data/bakery_instances.xml", "RDF/XML");
+		Model schema = ModelFactory.createMemModelMaker().createModel("bakery");
+		schema.read("file:data/bakery.xml", "RDF/XML");
+		Model data = ModelFactory.createMemModelMaker().createModel("bakery_instances");
+		data.read("file:data/bakery_instances.xml", "RDF/XML");
+		
+		infmodel = ModelFactory.createRDFSModel(schema, data);
 		
 		this.inferModel();
 		
-//		this.printAllStatements(infmodel);
+		this.printAllStatements(infmodel);
 	}
 	
 	
 	public String sparql(String sparql) {
 		logger.info("querying "+sparql); 
 		Query query = QueryFactory.create(sparql);
-		QueryExecution qe = QueryExecutionFactory.create(query, model);
+		QueryExecution qe = QueryExecutionFactory.create(query, infmodel);
 		ResultSet results = qe.execSelect();
 		
 		ResultSetFormatter.outputAsXML(true);
@@ -72,12 +73,12 @@ public class Bakery {
 		// TEST
 		logger.info("insert: [sub:" + subject + " - " + property + " obj: " + object);
 		
-		Resource r = model.createResource(ResourceURI + subject);
-		Property p = model.createProperty(PropertyURI + property);
+		Resource r = infmodel.createResource(ResourceURI + subject);
+		Property p = infmodel.createProperty(PropertyURI + property);
 		
-		Statement stmt = model.createStatement(r, p, object);
+		Statement stmt = infmodel.createStatement(r, p, object);
 		
-		model.add(stmt);
+		infmodel.add(stmt);
 		
 		// when model is still valid
 		if(inferModel())
@@ -85,7 +86,7 @@ public class Bakery {
 		
 		logger.error("insert failed");
 		// if model is not valid any more
-		model.remove(stmt);
+		infmodel.remove(stmt);
 		return false;
 	}
 	
@@ -102,7 +103,7 @@ public class Bakery {
 		reasoner.setOWLTranslation(true);			   // not needed in RDFS case
 		reasoner.setTransitiveClosureCaching(true);
 		
-		infmodel = ModelFactory.createInfModel(reasoner, model);
+		infmodel = ModelFactory.createInfModel(reasoner, infmodel);
 		
 		
 		ValidityReport validity = infmodel.validate();
