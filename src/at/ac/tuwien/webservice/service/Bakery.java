@@ -4,6 +4,8 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
+import org.apache.log4j.Logger;
+
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -18,11 +20,12 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 public class Bakery {
 	
 	private Model model;
+	private static Logger logger = Logger.getLogger(Bakery.class);
 
 	public Bakery() {
 		model = ModelFactory.createMemModelMaker().createModel("bakery");
-		model.read("data/bakery.xml", "RDF/XML");
-		model.read("data/bakery_instances.xml", "RDF/XML");
+		model.read("file:data/bakery.xml", "RDF/XML");
+		model.read("file:data/bakery_instances.xml", "RDF/XML");
 	}
 	
 	public String sparql(String sparql) {
