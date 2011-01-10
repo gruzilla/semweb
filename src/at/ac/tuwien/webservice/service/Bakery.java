@@ -5,6 +5,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -16,7 +17,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
 @WebService
-@SOAPBinding(style=Style.DOCUMENT)
+@SOAPBinding(style=Style.RPC)
 public class Bakery {
 	
 	private Model model;
@@ -29,6 +30,7 @@ public class Bakery {
 	}
 	
 	public String sparql(String sparql) {
+		logger.info("querying "+sparql); 
 		Query query = QueryFactory.create(sparql);
 		QueryExecution qe = QueryExecutionFactory.create(query, model);
 		ResultSet results = qe.execSelect();
@@ -41,6 +43,5 @@ public class Bakery {
 	}
 	
 	public void insert() {
-		
 	}
 }
