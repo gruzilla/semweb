@@ -1,0 +1,951 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY bakery "http://localhost/bakery.owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:bakery="http://localhost/bakery.owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <Ontology rdf:about="http://localhost/bakery.owl">
+        <rdfs:comment rdf:datatype="&rdf;PlainLiteral">Explanation:
+
+The Ontology is grouped into &quot;Ingredients&quot;, &quot;Pastry&quot;, &quot;Ressources&quot; and &quot;Worker&quot;. The most important relation (object attribute) exists between Ingredients and Pastry, because each Pastry has special Ingredients. Therefore an inverse functional property exists (&quot;consists&quot;), which specifies the relation between Ingredients and Pastries. Moreover the baker (&quot;Worker&quot;) is related to the Pastries, because he bakes them and the &quot;Cleaner&quot; cleans the &quot;Ressources&quot;.
+Data properties can be found at the Ingredients, which have an amount and the Pastries, which have an prize.
+
+The baker bakes ALL Pastries (universal quantifier), but a Pastry must not consist of all Ingredients (existential quantifier).
+
+Automated classifications can be found in the Pastries. There are automated classifications for all Pastries (to group which Pastries consist of &quot;RyeFlour&quot; or &quot;WheatFlour&quot;) and for &quot;Rolls&quot;, which can consist of different Ingredients (f.e. with &quot;Bacon&quot;, with &quot;Cheese&quot;, or with &quot;Bacon&quot; and &quot;Cheese&quot;).
+
+
+used:
+Protege 4.1.0 (Mac OSX Version)</rdfs:comment>
+    </Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <AnnotationProperty rdf:about="&rdfs;comment"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/bakery.owl#bakedBy -->
+
+    <ObjectProperty rdf:about="&bakery;bakedBy">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&bakery;Baker"/>
+        <rdfs:domain rdf:resource="&bakery;Pastry"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;bakes"/>
+        <inverseOf rdf:resource="&bakery;bakesPastry"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#bakes -->
+
+    <ObjectProperty rdf:about="&bakery;bakes"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#bakesPastry -->
+
+    <ObjectProperty rdf:about="&bakery;bakesPastry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="&bakery;Baker"/>
+        <rdfs:range rdf:resource="&bakery;Pastry"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;bakes"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#clean -->
+
+    <ObjectProperty rdf:about="&bakery;clean"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#cleanes -->
+
+    <ObjectProperty rdf:about="&bakery;cleanes">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="&bakery;Cleaner"/>
+        <rdfs:range rdf:resource="&bakery;Ressources"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;clean"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#consists -->
+
+    <ObjectProperty rdf:about="&bakery;consists"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#consistsOf -->
+
+    <ObjectProperty rdf:about="&bakery;consistsOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&bakery;Ingredients"/>
+        <rdfs:domain rdf:resource="&bakery;Pastry"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;consists"/>
+        <inverseOf rdf:resource="&bakery;occursIn"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#getCleaned -->
+
+    <ObjectProperty rdf:about="&bakery;getCleaned">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&bakery;Cleaner"/>
+        <rdfs:domain rdf:resource="&bakery;Ressources"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;clean"/>
+        <inverseOf rdf:resource="&bakery;cleanes"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#occursIn -->
+
+    <ObjectProperty rdf:about="&bakery;occursIn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="&bakery;Ingredients"/>
+        <rdfs:range rdf:resource="&bakery;Pastry"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;consists"/>
+    </ObjectProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#sell -->
+
+    <ObjectProperty rdf:about="&bakery;sell"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#sells -->
+
+    <ObjectProperty rdf:about="&bakery;sells">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="&bakery;Pastry"/>
+        <rdfs:domain rdf:resource="&bakery;Seller"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;sell"/>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/bakery.owl#amount -->
+
+    <DatatypeProperty rdf:about="&bakery;amount"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#amountAvailable -->
+
+    <DatatypeProperty rdf:about="&bakery;amountAvailable">
+        <rdfs:domain rdf:resource="&bakery;Ingredients"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;amount"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#amountNeededPerDay -->
+
+    <DatatypeProperty rdf:about="&bakery;amountNeededPerDay">
+        <rdfs:domain rdf:resource="&bakery;Ingredients"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;amount"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://localhost/bakery.owl#prize -->
+
+    <DatatypeProperty rdf:about="&bakery;prize"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#prizePerPiece -->
+
+    <DatatypeProperty rdf:about="&bakery;prizePerPiece">
+        <rdfs:domain rdf:resource="&bakery;Pastry"/>
+        <rdfs:subPropertyOf rdf:resource="&bakery;prize"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/bakery.owl#Apple_Cake -->
+
+    <Class rdf:about="&bakery;Apple_Cake">
+        <rdfs:subClassOf rdf:resource="&bakery;Cake"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Bacon -->
+
+    <Class rdf:about="&bakery;Bacon">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#BaconRoll -->
+
+    <Class rdf:about="&bakery;BaconRoll">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedRoll"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Salt"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Flour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Bacon"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Water"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#BaconRolls -->
+
+    <Class rdf:about="&bakery;BaconRolls">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&bakery;Roll"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&bakery;consistsOf"/>
+                        <someValuesFrom rdf:resource="&bakery;Bacon"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Baker -->
+
+    <Class rdf:about="&bakery;Baker">
+        <rdfs:subClassOf rdf:resource="&bakery;Worker"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Baking_Oven -->
+
+    <Class rdf:about="&bakery;Baking_Oven">
+        <rdfs:subClassOf rdf:resource="&bakery;Ressources"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Biscuit -->
+
+    <Class rdf:about="&bakery;Biscuit">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Bread -->
+
+    <Class rdf:about="&bakery;Bread">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Brown_Bread -->
+
+    <Class rdf:about="&bakery;Brown_Bread">
+        <rdfs:subClassOf rdf:resource="&bakery;Bread"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;RyeFlour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Bun -->
+
+    <Class rdf:about="&bakery;Bun">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Bundt_Cake -->
+
+    <Class rdf:about="&bakery;Bundt_Cake">
+        <rdfs:subClassOf rdf:resource="&bakery;Cake"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Cake -->
+
+    <Class rdf:about="&bakery;Cake">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Cheese -->
+
+    <Class rdf:about="&bakery;Cheese">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseBaconRoll -->
+
+    <Class rdf:about="&bakery;CheeseBaconRoll">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedRoll"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Flour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Bacon"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Cheese"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Water"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseRoll -->
+
+    <Class rdf:about="&bakery;CheeseRoll">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedRoll"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Flour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Water"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Cheese"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseRolls -->
+
+    <Class rdf:about="&bakery;CheeseRolls">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&bakery;Roll"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&bakery;consistsOf"/>
+                        <someValuesFrom rdf:resource="&bakery;Cheese"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseSaltRoll -->
+
+    <Class rdf:about="&bakery;CheeseSaltRoll">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedRoll"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Salt"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Cheese"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Flour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Water"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Cheese_Cake -->
+
+    <Class rdf:about="&bakery;Cheese_Cake">
+        <rdfs:subClassOf rdf:resource="&bakery;Cake"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Cleaner -->
+
+    <Class rdf:about="&bakery;Cleaner">
+        <rdfs:subClassOf rdf:resource="&bakery;Worker"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;cleanes"/>
+                <someValuesFrom rdf:resource="&bakery;Ressources"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Cookie -->
+
+    <Class rdf:about="&bakery;Cookie">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Flour -->
+
+    <Class rdf:about="&bakery;Flour">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Fruit -->
+
+    <Class rdf:about="&bakery;Fruit">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Fruit_Cake -->
+
+    <Class rdf:about="&bakery;Fruit_Cake">
+        <rdfs:subClassOf rdf:resource="&bakery;Cake"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Ingredients -->
+
+    <Class rdf:about="&bakery;Ingredients">
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;occursIn"/>
+                <someValuesFrom rdf:resource="&bakery;Pastry"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Kneading_Machine -->
+
+    <Class rdf:about="&bakery;Kneading_Machine">
+        <rdfs:subClassOf rdf:resource="&bakery;Ressources"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Linzer_Torte -->
+
+    <Class rdf:about="&bakery;Linzer_Torte">
+        <rdfs:subClassOf rdf:resource="&bakery;Torte"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Milk -->
+
+    <Class rdf:about="&bakery;Milk">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#NamedIngredients -->
+
+    <Class rdf:about="&bakery;NamedIngredients">
+        <rdfs:subClassOf rdf:resource="&bakery;Ingredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#NamedPastry -->
+
+    <Class rdf:about="&bakery;NamedPastry">
+        <rdfs:subClassOf rdf:resource="&bakery;Pastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#NamedRoll -->
+
+    <Class rdf:about="&bakery;NamedRoll">
+        <rdfs:subClassOf rdf:resource="&bakery;Roll"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Pastry -->
+
+    <Class rdf:about="&bakery;Pastry">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;bakedBy"/>
+                <onClass rdf:resource="&bakery;Baker"/>
+                <qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</qualifiedCardinality>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Ingredients"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Pie -->
+
+    <Class rdf:about="&bakery;Pie">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Reform_Torte -->
+
+    <Class rdf:about="&bakery;Reform_Torte">
+        <rdfs:subClassOf rdf:resource="&bakery;Torte"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Ressources -->
+
+    <Class rdf:about="&bakery;Ressources">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Roll -->
+
+    <Class rdf:about="&bakery;Roll">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#RyeFlour -->
+
+    <Class rdf:about="&bakery;RyeFlour">
+        <rdfs:subClassOf rdf:resource="&bakery;Flour"/>
+        <disjointWith rdf:resource="&bakery;WheatFlour"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#RyeFlourPastry -->
+
+    <Class rdf:about="&bakery;RyeFlourPastry">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&bakery;Pastry"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&bakery;consistsOf"/>
+                        <someValuesFrom rdf:resource="&bakery;RyeFlour"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Rye_Bread -->
+
+    <Class rdf:about="&bakery;Rye_Bread">
+        <rdfs:subClassOf rdf:resource="&bakery;Bread"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;RyeFlour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Sacher_Torte -->
+
+    <Class rdf:about="&bakery;Sacher_Torte">
+        <rdfs:subClassOf rdf:resource="&bakery;Torte"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Salt -->
+
+    <Class rdf:about="&bakery;Salt">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#SaltRoll -->
+
+    <Class rdf:about="&bakery;SaltRoll">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedRoll"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Salt"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Flour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;Water"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Seller -->
+
+    <Class rdf:about="&bakery;Seller">
+        <rdfs:subClassOf rdf:resource="&bakery;Worker"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Sourdogh_Bread -->
+
+    <Class rdf:about="&bakery;Sourdogh_Bread">
+        <rdfs:subClassOf rdf:resource="&bakery;Bread"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;WheatFlour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Storage_Room -->
+
+    <Class rdf:about="&bakery;Storage_Room">
+        <rdfs:subClassOf rdf:resource="&bakery;Ressources"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Tart -->
+
+    <Class rdf:about="&bakery;Tart">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Torte -->
+
+    <Class rdf:about="&bakery;Torte">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedPastry"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Water -->
+
+    <Class rdf:about="&bakery;Water">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#WheatFlour -->
+
+    <Class rdf:about="&bakery;WheatFlour">
+        <rdfs:subClassOf rdf:resource="&bakery;Flour"/>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#WheatFlourPastry -->
+
+    <Class rdf:about="&bakery;WheatFlourPastry">
+        <equivalentClass>
+            <Class>
+                <intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&bakery;Pastry"/>
+                    <Restriction>
+                        <onProperty rdf:resource="&bakery;consistsOf"/>
+                        <someValuesFrom rdf:resource="&bakery;WheatFlour"/>
+                    </Restriction>
+                </intersectionOf>
+            </Class>
+        </equivalentClass>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#White_Bread -->
+
+    <Class rdf:about="&bakery;White_Bread">
+        <rdfs:subClassOf rdf:resource="&bakery;Bread"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;WheatFlour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Whole_grain_Bread -->
+
+    <Class rdf:about="&bakery;Whole_grain_Bread">
+        <rdfs:subClassOf rdf:resource="&bakery;Bread"/>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="&bakery;consistsOf"/>
+                <someValuesFrom rdf:resource="&bakery;RyeFlour"/>
+            </Restriction>
+        </rdfs:subClassOf>
+    </Class>
+    
+
+
+    <!-- http://localhost/bakery.owl#Worker -->
+
+    <Class rdf:about="&bakery;Worker"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Yeast -->
+
+    <Class rdf:about="&bakery;Yeast">
+        <rdfs:subClassOf rdf:resource="&bakery;NamedIngredients"/>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <Class rdf:about="http://www.w3.org/2002/07/owl#Thing"/>
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Linzer_Torte"/>
+            <rdf:Description rdf:about="&bakery;Reform_Torte"/>
+            <rdf:Description rdf:about="&bakery;Sacher_Torte"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Baker"/>
+            <rdf:Description rdf:about="&bakery;Cleaner"/>
+            <rdf:Description rdf:about="&bakery;Seller"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Biscuit"/>
+            <rdf:Description rdf:about="&bakery;Bread"/>
+            <rdf:Description rdf:about="&bakery;Bun"/>
+            <rdf:Description rdf:about="&bakery;Cake"/>
+            <rdf:Description rdf:about="&bakery;Cookie"/>
+            <rdf:Description rdf:about="&bakery;Pie"/>
+            <rdf:Description rdf:about="&bakery;Roll"/>
+            <rdf:Description rdf:about="&bakery;Tart"/>
+            <rdf:Description rdf:about="&bakery;Torte"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;BaconRoll"/>
+            <rdf:Description rdf:about="&bakery;CheeseBaconRoll"/>
+            <rdf:Description rdf:about="&bakery;CheeseRoll"/>
+            <rdf:Description rdf:about="&bakery;CheeseSaltRoll"/>
+            <rdf:Description rdf:about="&bakery;SaltRoll"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Baking_Oven"/>
+            <rdf:Description rdf:about="&bakery;Kneading_Machine"/>
+            <rdf:Description rdf:about="&bakery;Storage_Room"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Apple_Cake"/>
+            <rdf:Description rdf:about="&bakery;Bundt_Cake"/>
+            <rdf:Description rdf:about="&bakery;Cheese_Cake"/>
+            <rdf:Description rdf:about="&bakery;Fruit_Cake"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Fruit"/>
+            <rdf:Description rdf:about="&bakery;Milk"/>
+            <rdf:Description rdf:about="&bakery;Water"/>
+            <rdf:Description rdf:about="&bakery;Yeast"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Ingredients"/>
+            <rdf:Description rdf:about="&bakery;Pastry"/>
+            <rdf:Description rdf:about="&bakery;Ressources"/>
+            <rdf:Description rdf:about="&bakery;Worker"/>
+        </members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <members rdf:parseType="Collection">
+            <rdf:Description rdf:about="&bakery;Brown_Bread"/>
+            <rdf:Description rdf:about="&bakery;Rye_Bread"/>
+            <rdf:Description rdf:about="&bakery;Sourdogh_Bread"/>
+            <rdf:Description rdf:about="&bakery;White_Bread"/>
+            <rdf:Description rdf:about="&bakery;Whole_grain_Bread"/>
+        </members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

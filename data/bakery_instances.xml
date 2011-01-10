@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY bakery "http://localhost/bakery.owl#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:bakery="http://localhost/bakery.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl">
+        <owl:imports rdf:resource="http://localhost/bakery.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/bakery.owl#amountAvailable -->
+
+    <owl:DatatypeProperty rdf:about="&bakery;amountAvailable"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#amountNeededPerDay -->
+
+    <owl:DatatypeProperty rdf:about="&bakery;amountNeededPerDay"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#prizePerPiece -->
+
+    <owl:DatatypeProperty rdf:about="&bakery;prizePerPiece"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://localhost/bakery.owl#Bacon -->
+
+    <owl:Class rdf:about="&bakery;Bacon"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#BaconRoll -->
+
+    <owl:Class rdf:about="&bakery;BaconRoll"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Brown_Bread -->
+
+    <owl:Class rdf:about="&bakery;Brown_Bread"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Cheese -->
+
+    <owl:Class rdf:about="&bakery;Cheese"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseBaconRoll -->
+
+    <owl:Class rdf:about="&bakery;CheeseBaconRoll"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseRoll -->
+
+    <owl:Class rdf:about="&bakery;CheeseRoll"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#CheeseSaltRoll -->
+
+    <owl:Class rdf:about="&bakery;CheeseSaltRoll"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Fruit -->
+
+    <owl:Class rdf:about="&bakery;Fruit"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#RyeFlour -->
+
+    <owl:Class rdf:about="&bakery;RyeFlour"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Rye_Bread -->
+
+    <owl:Class rdf:about="&bakery;Rye_Bread"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Salt -->
+
+    <owl:Class rdf:about="&bakery;Salt"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Sourdogh_Bread -->
+
+    <owl:Class rdf:about="&bakery;Sourdogh_Bread"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#Water -->
+
+    <owl:Class rdf:about="&bakery;Water"/>
+    
+
+
+    <!-- http://localhost/bakery.owl#WheatFlour -->
+
+    <owl:Class rdf:about="&bakery;WheatFlour"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#Apple1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#Apple1">
+        <rdf:type rdf:resource="&bakery;Fruit"/>
+        <bakery:amountNeededPerDay>1</bakery:amountNeededPerDay>
+        <bakery:amountAvailable>30</bakery:amountAvailable>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#BaconRoll1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#BaconRoll1">
+        <rdf:type rdf:resource="&bakery;BaconRoll"/>
+        <bakery:prizePerPiece>3</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#BrownBread -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#BrownBread">
+        <rdf:type rdf:resource="&bakery;Brown_Bread"/>
+        <bakery:prizePerPiece>30</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#CheeseBaconRoll1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#CheeseBaconRoll1">
+        <rdf:type rdf:resource="&bakery;CheeseBaconRoll"/>
+        <bakery:prizePerPiece>4</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#CheeseRoll1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#CheeseRoll1">
+        <rdf:type rdf:resource="&bakery;CheeseRoll"/>
+        <bakery:prizePerPiece>4</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#CheeseSaltRoll1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#CheeseSaltRoll1">
+        <rdf:type rdf:resource="&bakery;CheeseSaltRoll"/>
+        <bakery:prizePerPiece>4</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#RyeBread -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#RyeBread">
+        <rdf:type rdf:resource="&bakery;Rye_Bread"/>
+        <bakery:prizePerPiece>10</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#RyeFlourBag -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#RyeFlourBag">
+        <rdf:type rdf:resource="&bakery;RyeFlour"/>
+        <bakery:amountAvailable>30</bakery:amountAvailable>
+        <bakery:amountNeededPerDay>1</bakery:amountNeededPerDay>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#Salt1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#Salt1">
+        <rdf:type rdf:resource="&bakery;Salt"/>
+        <bakery:amountAvailable>500</bakery:amountAvailable>
+        <bakery:amountNeededPerDay>30</bakery:amountNeededPerDay>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#SourBread -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#SourBread">
+        <rdf:type rdf:resource="&bakery;Sourdogh_Bread"/>
+        <bakery:prizePerPiece>3</bakery:prizePerPiece>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#WheatFlourBag -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#WheatFlourBag">
+        <rdf:type rdf:resource="&bakery;WheatFlour"/>
+        <bakery:amountAvailable>30</bakery:amountAvailable>
+        <bakery:amountNeededPerDay>1</bakery:amountNeededPerDay>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#bacon1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#bacon1">
+        <rdf:type rdf:resource="&bakery;Bacon"/>
+        <bakery:amountAvailable>333</bakery:amountAvailable>
+        <bakery:amountNeededPerDay>30</bakery:amountNeededPerDay>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#cheese1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#cheese1">
+        <rdf:type rdf:resource="&bakery;Cheese"/>
+        <bakery:amountAvailable>444</bakery:amountAvailable>
+        <bakery:amountNeededPerDay>30</bakery:amountNeededPerDay>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#water1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/0/bakery_instances.owl#water1">
+        <rdf:type rdf:resource="&bakery;Water"/>
+        <bakery:amountNeededPerDay>30</bakery:amountNeededPerDay>
+        <bakery:amountAvailable>400</bakery:amountAvailable>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+
