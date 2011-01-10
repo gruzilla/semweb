@@ -3,9 +3,9 @@
 [rdfs6:  (?a ?p ?b), (?p rdfs:subPropertyOf ?q) -> (?a ?q ?b)]
 [rdfs9:  (?x rdfs:subClassOf ?y), (?a rdf:type ?x) -> (?a rdf:type ?y)]
 
-[applecake: (?s rdf:type http://localhost/bakery.owl#Milk) 
+[lotsacheese: (?s rdf:type http://localhost/bakery.owl#LotsOfCheese) 
 	<- 
 	(?s rdf:type http://localhost/bakery.owl#Cheese)
 	(?s http://localhost/bakery.owl#amountAvailable ?c)
-	lessThan(?c,2)
+	greaterThan(?c,2)
 ]

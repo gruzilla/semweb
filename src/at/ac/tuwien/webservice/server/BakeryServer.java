@@ -13,8 +13,14 @@ public class BakeryServer {
 			Endpoint.publish("http://localhost:8080/bakery", server);
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println("Press enter to stop the server.");
-		input.hasNextLine();
+		System.out.println("Type 'exit' to stop the server or 'printModel' to print it.");
+		while(input.hasNextLine()) {
+			String line = input.next().trim();
+			if (line.equals("") || line.equals("exit")) break;
+			if (line.equals("printModel")) {
+				server.printAllStatements();
+			}
+		}
 		System.out.println("ty");
 		
 		endpoint.stop();

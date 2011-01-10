@@ -37,7 +37,8 @@ public class Bakery {
 	private static final String ResourceURI = "http://localhost/bakery.owl#";
 	private static final String PropertyURI = "http://localhost/bakery.owl#";
 	private static final String InstanceURI = "http://localhost/bakery_instances.owl#";
-	
+	private static final String TypeProperty = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type";
+	private static final String SubClassProperty = "http://www.w3.org/2000/01/rdf-schema#subClassOf";
 	
 	private static Logger logger = Logger.getLogger(Bakery.class);
 	
@@ -50,8 +51,6 @@ public class Bakery {
 		infmodel = ModelFactory.createRDFSModel(schema, data);
 		
 		this.inferModel();
-		
-		this.printAllStatements(infmodel);
 	}
 	
 	
@@ -73,10 +72,31 @@ public class Bakery {
 		// TEST
 		logger.info("insert: [sub:" + subject + " - " + property + " obj: " + object);
 		
-		Resource r = infmodel.createResource(ResourceURI + subject);
-		Property p = infmodel.createProperty(PropertyURI + property);
+		String first = subject.substring(0,1);
+		if (first.toLowerCase().equals(first)) {
+			subject = InstanceURI + subject;
+		} else {
+			subject = ResourceURI + subject;
+		}
 		
-		Statement stmt = infmodel.createStatement(r, p, object);
+		Resource r = infmodel.getResource(subject);
+		if (r == null) r = infmodel.createResource(subject);
+		
+		if (property.equals("type")) {
+			property = TypeProperty;
+		} else if (property.equals("subClassOf")) {
+			property = SubClassProperty;
+		} else {
+			property = PropertyURI + property;
+		}
+		Property p = infmodel.createProperty(property);
+		
+		Statement stmt;
+		if (object.contains("#")) {
+			stmt = infmodel.createStatement(r, p, infmodel.getResource(object));
+		} else {
+			stmt = infmodel.createStatement(r, p, object);
+		}
 		
 		infmodel.add(stmt);
 		
@@ -125,11 +145,11 @@ public class Bakery {
 	 * 
 	 * prints all statements
 	 */
-	private void printAllStatements(Model m)	{
+	public void printAllStatements()	{
 		// print existing statements
 		// list the statements in the Model
 //		/*
-		StmtIterator iter = m.listStatements();
+		StmtIterator iter = infmodel.listStatements();
 
 		// print out the predicate, subject and object of each statement
 		while (iter.hasNext()) {
