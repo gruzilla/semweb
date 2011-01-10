@@ -1,0 +1,11 @@
+[rdfs2:  (?x ?p ?y), (?p rdfs:domain ?c) -> (?x rdf:type ?c)]
+[rdfs3:  (?x ?p ?y), (?p rdfs:range ?c) -> (?y rdf:type ?c)]
+[rdfs6:  (?a ?p ?b), (?p rdfs:subPropertyOf ?q) -> (?a ?q ?b)]
+[rdfs9:  (?x rdfs:subClassOf ?y), (?a rdf:type ?x) -> (?a rdf:type ?y)]
+
+[applecake: (?s rdf:type http://localhost/bakery#Cheese_Cake) 
+	<- 
+	(?s rdf:type http://localhost/bakery#Cheese)
+	(?s http://localhost/bakery#amount ?c)
+	greaterThan(?c,2)
+]

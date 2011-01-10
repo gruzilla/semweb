@@ -1,6 +1,7 @@
 package at.ac.tuwien.webservice.service;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -24,6 +25,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.reasoner.ValidityReport;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 
 @WebService
 @SOAPBinding(style=Style.RPC)
@@ -93,19 +96,27 @@ public class Bakery {
 	 * @return boolean (successfull?)
 	 */
 	private boolean inferModel()	{
-	    infmodel = ModelFactory.createRDFSModel(model);
-	    
-	    ValidityReport validity = infmodel.validate();
-	    if (validity.isValid()) {
-	        logger.info("Validation OK");
-	        return true;
-	    } else {
-	        logger.error("Conflicts");
-	        for (Iterator<?> i = validity.getReports(); i.hasNext(); ) {
-	            logger.error(" - " + i.next());
-	        }
-	    }
-	    return false;
+		List<Rule> rules = Rule.rulesFromURL("file:data/generic.rules");
+		
+		GenericRuleReasoner reasoner = new GenericRuleReasoner(rules);
+		reasoner.setOWLTranslation(true);			   // not needed in RDFS case
+		reasoner.setTransitiveClosureCaching(true);
+		
+		infmodel = ModelFactory.createInfModel(reasoner, model);
+		
+		
+		ValidityReport validity = infmodel.validate();
+		if (validity.isValid()) {
+			logger.info("Validation OK");
+			return true;
+		} else {
+			logger.error("Conflicts");
+			for (Iterator<?> i = validity.getReports(); i.hasNext(); ) {
+				logger.error(" - " + i.next());
+			}
+		}
+		
+		return false;
 	}
 	
 	
@@ -121,21 +132,21 @@ public class Bakery {
 
 		// print out the predicate, subject and object of each statement
 		while (iter.hasNext()) {
-		    Statement stmt      = iter.nextStatement();  // get next statement
-		    Resource  subject   = stmt.getSubject();     // get the subject
-		    Property  predicate = stmt.getPredicate();   // get the predicate
-		    RDFNode   object    = stmt.getObject();      // get the object
+			Statement stmt	  = iter.nextStatement();  // get next statement
+			Resource  subject   = stmt.getSubject();	 // get the subject
+			Property  predicate = stmt.getPredicate();   // get the predicate
+			RDFNode   object	= stmt.getObject();	  // get the object
 
-		    System.out.print(subject.toString());
-		    System.out.print(" " + predicate.toString() + " ");
-		    if (object instanceof Resource) {
-		       System.out.print("res: " + object.toString());
-		    } else {
-		        // object is a literal
-		        System.out.print(" \"" + object.toString() + "\"");
-		    }
+			System.out.print(subject.toString());
+			System.out.print(" " + predicate.toString() + " ");
+			if (object instanceof Resource) {
+			   System.out.print("res: " + object.toString());
+			} else {
+				// object is a literal
+				System.out.print(" \"" + object.toString() + "\"");
+			}
 
-		    System.out.println(" .");
+			System.out.println(" .");
 		}
 //		*/
 	}
